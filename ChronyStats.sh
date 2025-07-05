@@ -7,7 +7,7 @@ do
    echo ${AVG} ${NAME} ${HOST}
 done | sort -k 1,1g > mystatistics.sort
 
-logrotate --force --verbose ./logrotate.conf
+logrotate --force ./logrotate.conf
 
 for FILE in mystatistics.sort.*
 do
