@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for HOST in $( chronyc -n sources | egrep -v "MS|===|0ns$" | awk '{ print $2 }' )
+for HOST in $( chronyc -n sources | egrep -v "nan|MS|===|0ns$" | awk '{ print $2 }' )
 do
    AVG=$( grep ${HOST} ../statistics.log | tail -100 | awk '{ sum += $5 } END { if (sum < 0) { sum = -sum } ; print sum / NR }' )
    NAME=$( getent hosts ${HOST} | awk '{ print $2 }' )
