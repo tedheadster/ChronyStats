@@ -8,3 +8,8 @@ do
 done | sort -k 1,1g > mystatistics.sort
 
 logrotate --force --verbose ./logrotate.conf
+
+for FILE in mystatistics.sort.*
+do
+    awk '{ print $2 }' ${FILE} > $( echo ${FILE} | sed -e 's/sort/rank/g' )
+done
