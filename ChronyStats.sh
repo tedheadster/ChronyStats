@@ -10,6 +10,7 @@ do
 done | sort -k 1,1g > mystatistics.sort
 
 logrotate --force ./logrotate.conf
+chronyc cyclelogs
 
 for FILE in mystatistics.sort.*
 do
