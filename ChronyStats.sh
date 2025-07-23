@@ -6,7 +6,7 @@ logrotate --force ./logrotate.mystatistics.conf
 
 for HOST in $( chronyc -n sources | egrep -v "nan|MS|===|0ns$" | awk '{ print $2 }' )
 do
-   AVG=$( grep -a ${HOST} ../statistics.log | tail -${SAMPLES} | awk '{ sum += $5 } END { if (sum < 0) { sum = -sum } ; print sum / NR }' )
+   AVG=$( grep -a ${HOST} ../statistics.log | tail -${SAMPLES} | awk '{ sum += $5 } END { if (sum < 0) { sum = -sum } ; printf "%+0.9f", (sum / NR) }' )
    NAME=$( getent hosts ${HOST} | awk '{ print $2 }' )
    echo ${AVG} ${NAME} ${HOST}
 done | sort -k 1,1g > mystatistics.sort
